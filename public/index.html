@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rainbow Bridge Memorial - Honor Your Beloved Pet</title>
+    <meta name="description" content="Create heartfelt tributes for your beloved pets who have crossed the rainbow bridge. Share memories, photos, and celebrate their lives in our peaceful memorial gallery.">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Toast Container -->
+    <div id="toast-container"></div>
+
+    <div class="app">
+        <!-- Hero Section -->
+        <header class="hero">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <svg class="hero-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                </svg>
+                <h1 class="hero-title">Rainbow Bridge Memorial</h1>
+                <p class="hero-subtitle">A peaceful place to honor and remember our beloved companions who have crossed the rainbow bridge</p>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="container">
+            <!-- Tribute Form -->
+            <section class="form-section">
+                <div class="card form-card">
+                    <div class="card-header">
+                        <h2 class="card-title">
+                            <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                            </svg>
+                            Create a Tribute
+                        </h2>
+                        <p class="card-description">Honor your beloved companion with a heartfelt memory</p>
+                    </div>
+                    <div class="card-content">
+                        <form id="tribute-form">
+                            <div class="form-group">
+                                <label for="petName">Pet's Name</label>
+                                <input type="text" id="petName" placeholder="Enter your pet's name" maxlength="100" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="petPhoto">Photo</label>
+                                <div class="file-input-wrapper">
+                                    <input type="file" id="petPhoto" accept="image/*" required>
+                                    <button type="button" class="upload-btn">
+                                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                            <polyline points="17 8 12 3 7 8"></polyline>
+                                            <line x1="12" y1="3" x2="12" y2="15"></line>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div id="imagePreview" class="image-preview hidden"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="petDescription">Memory</label>
+                                <textarea id="petDescription" rows="6" placeholder="Share a cherished memory or what made your pet special..." maxlength="1000" required></textarea>
+                                <p class="char-count"><span id="charCount">0</span>/1000 characters</p>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">
+                                <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                                </svg>
+                                Create Tribute
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Download Button -->
+            <!-- <div id="download-section" class="download-section hidden">
+                <button id="download-btn" class="btn btn-secondary">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                    Download All Tributes (CSV)
+                </button>
+            </div> -->
+
+            <!-- Gallery Section -->
+            <section class="gallery-section">
+                <div id="gallery-content"></div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p class="footer-text">
+                Made with 
+                <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                </svg>
+                in loving memory
+            </p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
