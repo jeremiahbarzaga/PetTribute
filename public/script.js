@@ -1,4 +1,4 @@
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxQmYWsBcQZsZ0fZCeBln3fINLvrz9y2riExKCMollP_Ap7yVAst8uXkYxxLtyFx1Go/exec'; // Replace with your Apps Script URL
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyTGrMVr2E8v7M6T7_XkuH40lbeRl8xb7qDn35hn1jXriPilzHW93CBGlWLnKCw_FZW/exec';
 let tributes = [];
 let currentImageBase64 = '';
 
@@ -13,7 +13,7 @@ function setupEventListeners() {
   document.getElementById('petDescription').addEventListener('input', updateCharCount);
 }
 
-function handleSubmit(e) {
+async function handleSubmit(e) {
   e.preventDefault();
 
   const name = document.getElementById('petName').value.trim();
@@ -24,23 +24,33 @@ function handleSubmit(e) {
     return;
   }
 
-  // Encode data for GET request
-  const url = `${SCRIPT_URL}?name=${encodeURIComponent(name)}&description=${encodeURIComponent(description)}&image=${encodeURIComponent(currentImageBase64)}`;
+  const tributeData = { name, description, imageBase64: currentImageBase64 };
 
-  fetch(url)
-    .then(res => res.text())
-    .then(() => {
+  try {
+    const response = await fetch(SCRIPT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(tributeData)
+    });
+
+    const result = await response.json();
+    if (result.status === 'success') {
       fetchTributes(); // Refresh gallery
       resetForm();
-    })
-    .catch(err => console.error(err));
+    } else {
+      alert('Error saving tribute: ' + result.message);
+    }
+  } catch (err) {
+    console.error(err);
+    alert('Error saving tribute. See console for details.');
+  }
 }
 
 function handleImageUpload(e) {
   const file = e.target.files[0];
   if (!file) return;
 
-  if (file.size > 5 * 1024 * 1024) { // 5MB limit
+  if (file.size > 5 * 1024 * 1024) {
     alert('File too large. Max 5MB.');
     return;
   }
@@ -64,14 +74,16 @@ function resetForm() {
   document.getElementById('charCount').textContent = '0';
 }
 
-function fetchTributes() {
-  fetch(SCRIPT_URL)
-    .then(res => res.json())
-    .then(data => {
-      tributes = data.reverse(); // latest first
-      renderGallery();
-    })
-    .catch(err => console.error(err));
+async function fetchTributes() {
+  try {
+    const res = await fetch(SCRIPT_URL);
+    const data = await res.json();
+    tributes = data.reverse(); // latest first
+    renderGallery();
+  } catch (err) {
+    console.error(err);
+    document.getElementById('gallery-content').innerHTML = '<p>Error loading tributes.</p>';
+  }
 }
 
 function renderGallery() {
